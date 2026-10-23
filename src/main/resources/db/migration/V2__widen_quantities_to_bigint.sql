@@ -1,0 +1,3 @@
+ALTER TABLE products ALTER COLUMN quantity TYPE BIGINT;
+ALTER TABLE shop_products ALTER COLUMN quantity TYPE BIGINT;
+ALTER TABLE orders ALTER COLUMN quantity_req TYPE BIGINT;
