@@ -1,6 +1,10 @@
 package com.acrist.client;
 
-import com.acrist.auth.AppUser;
+import com.acrist.client.api.SupplyApiClient;
+import com.acrist.client.ui.SupplyFrame;
+import com.acrist.client.ui.auth.LoginDialog;
+import com.acrist.shared.auth.AppUser;
+
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
@@ -16,17 +20,17 @@ public class SupplyDesktopStart {
                 // Не лучшая практика, но смысла отрабатывать исключения нет
             }
 
-            showLogin(new ProductApiClient(apiUrl));
+            showLogin(new SupplyApiClient(apiUrl));
         });
     }
 
-    private static void showLogin(ProductApiClient apiClient) {
+    private static void showLogin(SupplyApiClient apiClient) {
         LoginDialog dialog = new LoginDialog(apiClient);
         dialog.setVisible(true);
         AppUser user = dialog.loggedInUser();
 
         if (user != null) {
-            ProductFrame frame = new ProductFrame(apiClient, user, () -> showLogin(apiClient));
+            SupplyFrame frame = new SupplyFrame(apiClient, user, () -> showLogin(apiClient));
             frame.setVisible(true);
             frame.refreshAll();
         }
